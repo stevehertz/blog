@@ -79,4 +79,10 @@ class PostsController extends Controller
         $response['message'] = "You have successfully deleted a post";
         return response()->json($response);
     }
+
+    public function search($title)
+    {
+        # code...
+        return Post::where('title', 'like', '%'.$title.'%')->get();
+    }
 }

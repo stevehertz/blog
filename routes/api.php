@@ -15,15 +15,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Public Routes
 Route::get('/index', [PostsController::class, 'index']);
-
-Route::post('/store', [PostsController::class, 'store']);
 
 Route::get('/{id}/show', [PostsController::class, 'show']);
 
-Route::put('/{id}/update', [PostsController::class, 'update']);
 
-Route::delete('/{id}/delete', [PostsController::class, 'destroy']);
+// Protected Routes
+Route::group(['middleware' => ['auth:sanctum']], function(){
+
+    Route::post('/store', [PostsController::class, 'store']);
+
+    Route::put('/{id}/update', [PostsController::class, 'update']);
+
+    Route::get('/{title}/search', [PostsController::class, 'search']);
+
+    Route::delete('/{id}/delete', [PostsController::class, 'destroy']);
+
+});
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
