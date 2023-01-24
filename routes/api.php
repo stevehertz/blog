@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Posts\PostsController;
+use App\Http\Controllers\Users\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,8 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::get('/{title}/search', [PostsController::class, 'search']);
 
     Route::delete('/{id}/delete', [PostsController::class, 'destroy']);
+
+    Route::post('/logout', [UsersController::class, 'logout']);
 
 });
 
