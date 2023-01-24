@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Posts\PostsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,7 @@ Route::get('/index', [PostsController::class, 'index']);
 
 Route::get('/{id}/show', [PostsController::class, 'show']);
 
+Route::post('/register', [RegisterController::class, 'store']);
 
 // Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function(){
